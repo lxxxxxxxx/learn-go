@@ -1,9 +1,14 @@
 package main
 
-import(
+import (
 	"fmt"
 )
 
-func main(){
-	fmt.Println("hello world")
+//Hello :return Hello World.
+func Hello(name string) string {
+	return "Hello " + name
+}
+
+func main() {
+	fmt.Println(Hello("World"))
 }
