@@ -1,18 +1,9 @@
 package array
 
 import (
-	"testing"
 	"reflect"
+	"testing"
 )
-
-func Sum(slice []int) (sum int) {
-	for _, num := range slice {
-		sum += num
-	}
-	return
-}
-
-func AllSum(sl)
 
 func TestSum(t *testing.T) {
 
@@ -20,6 +11,12 @@ func TestSum(t *testing.T) {
 		t.Helper()
 		if got != want {
 			t.Errorf("want %d ,but got %d", want, got)
+		}
+	}
+
+	checkSum := func(t *testing.T,want []int,got []int){
+		if !reflect.DeepEqual(want, got) {
+			t.Errorf("want %v ,but got %v", want, got)
 		}
 	}
 
@@ -40,13 +37,26 @@ func TestSum(t *testing.T) {
 
 		assert(want, got)
 	})
-}
 
-func TestAllSum(t *testing.T){
-	want := AllSum([]int{1,2,3},[]int[4,5,6])
-	got := []int{6,15}
+	t.Run("test all sum", func(t *testing.T) {
+		// want := AllSum([]int{1, 2, 3}, []int{4, 5, 6})
+		want := AllSum1([]int{1, 2, 3}, []int{4, 5, 6})
+		got := []int{6, 15}
 
-	if !reflect.DeepEqual(want,got){
-		t.Errorf("want %v ,but got %v",want,got)
-	}
+		checkSum(t,want,got)
+	})
+
+	t.Run("test sum all tail",func(t* testing.T){
+		got :=SumAllTial([]int{1,2,3},[]int{2,5,8,4},[]int{3,4,7,5})
+		want:=[]int{5,17,16}
+
+		checkSum(t,want,got)
+	})
+
+	t.Run("test empty slice",func(t* testing.T){
+		got:=SumAllTial([]int{},[]int{1,2,5})
+		want:=[]int{0,7}
+
+		checkSum(t,want,got)
+	})
 }
